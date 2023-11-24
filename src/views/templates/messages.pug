@@ -1,0 +1,17 @@
+extends ../layout/index 
+block content 
+    div.py-10 
+        h1.text-center.text-4xl.font-extrabold.my-10.text-darkCian Bienes 
+            span.fond-normal.text-white Raices
+        h2.text-center.text-3xl.font-extrabold= page
+    .mt-8.mx-auto.max-w-xl
+        .bg-white.py-8.px-4.shadow-xl.rounded-3xl.flex.flex-col.items-center
+            if type==="Error"
+                p(class="text-xl font-bold text-center my-10 uppercase bg-rosyBrown text-black w-full py-3")= type
+            else if type==="Warning"
+                p(class="text-xl font-bold text-center my-10 uppercase bg-yellow text-blac w-full py-3")= type
+            else if type==="Information"
+                p(class="text-xl font-bold text-center my-10 uppercase bg-green text-black w-full py-3")= type
+            p(class="text-xl font-bold text-center my-10")= message
+
+            a(href="/login" class="w-full bg-coolGray hover:bg-rosyBrown text-black hover:text-darkCian font-bold py-3 cursor-pointer rounded-xl mt-4 uppercase text-center") Back to login

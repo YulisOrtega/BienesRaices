@@ -1,0 +1,49 @@
+extends ../layout/index
+
+block content
+  div.py-10
+    h1.text-center.text-4xl.font-extrabold.my-10.text-black.text-center Real
+      span.font-normal.text-darkCian.text-center State
+      
+    if errors
+      div(class="max-w-md mx-auto my-10 text-center")
+        each error in errors
+          div(class="bg-white-900 text-center py-4 lg:px-4")
+            div(class="p-2 bg-rosyBrown items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert")
+              span(class="flex rounded-full bg-orange-500 uppercase px-2 py-1 text-xs font-bold mr-3") Alert
+              span(class="font-semibold mr-2 text-left flex-auto")= error.msg
+              svg(class="fill-current opacity-75 h-4 w-4", xmlns="http://www.w3.org/2000/svg", viewBox="0 0 20 20")
+                path(d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z")
+                
+      script.
+        document.addEventListener("DOMContentLoaded", function() {
+          const alerts = document.querySelectorAll('.bg-white-900');
+
+          alerts.forEach(function(alert, index) {
+            setTimeout(function() {
+              alert.style.display = 'none';
+            }, (index + 1) * 3000); // 3000 ms = 3 segundos
+          });
+        });
+    h2.text-center.text-3xl.font-extrabold= page
+    .mt-8.mx-auto.max-w-xl 
+      .bg-rosyBrown.py-8.px-4.shadow-x1.rounded-lg
+        form.space-y-5(action="/login/register" method="POST" novalidate)
+          input(type="hidden" name="_csrf" value="csrfToken")
+          div.w-full
+            label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for="name") Name 
+            input#name.w-full.px-3.py-2.border.border.gray-300.rounded-xl(class="ease-in-out focus:outline-none focus:border-2 focus:border-darkCian" placeholder="full name" type="text" name="name" value=user ? user.name : '' required)
+          div.w-full
+            label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for="email") Email:
+            input#email.w-full.px-3.py-2.border.border-gray-300.rounded-xl(class="ease-in-out focus:outline-none focus:border-2 focus:border-darkCian" placeholder="user@domain.com" type="email" name="email" value=email ? user.email: '' required)
+          div.w-full
+            label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for="password" ) Password:
+            input#password.w-full.px-3.py-2.border.border-gray-300.rounded-xl(class="ease-in-out focus:outline-none focus:border-2 focus:border-darkCian" placeholder="Enter your password" type="password" name="password" required)
+          div.w-full
+            label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for="repeat-password") Confirm Password:
+            input#repeatpassword.w-full.px-3.py-2.border.border-gray-300.rounded-xl(class="ease-in-out focus:outline-none focus:border-2 focus:border-darkCian" placeholder="Repeat your password" type="password" name="repeatpassword" required)
+          div.w-full
+            input#button_register.w-full(style="background-color:esmerald;" class="text-white font-bold py-3 rounded-xl hover:bg-darkCian cursor-pointer", type="submit", value="Create Account")
+          div.flex.items-center.justify-between
+            a.text-xs.text-gray-500(href="/login" class="hover:underline decoration-4 decoration-coolGray") If you have an account, please Login 
+            a.text-xs.text-gray-500(href="/login/recovery" class="hover:underline decoration-4 decoration-coolGray") Forgot your password? Recover it

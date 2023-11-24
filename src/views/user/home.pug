@@ -1,0 +1,66 @@
+extends ../layout/index
+
+block content
+    div(class="py-10")
+        h1(class="text-4xl my-10 font-extrabold text-center text-black") Real
+            span(class="font-medium text-darkCian") Estate
+        h2(class="text-center text-2xl font-extrabold mb-10")= page 
+        a(href="property/create" class="rounded-lg py-2 px-10 bg-coolGray text-white text-center uppercase my-5 hover:bg-rosyBrown  hover: scale-105 text-sm font-bold inline-block md:w-auto") Publish Property
+
+        div(class="grid grid-cols-2 gap-8")
+            //Propiedades
+            div
+                table(class="border-collapse border border-darkCian w-full")
+                    tr 
+                        td(class="text-xl font-bold mb-4 text-center bg-esmerald") Propiedades en Venta
+                        td(class="text-xl font-bold mb-4 bg-esmerald") 
+                        td(class="text-xl font-bold mb-4 bg-esmerald")
+                    tr
+                        th(class="border border-coolGray bg-coolGray") Casa
+                        th(class="border border-rosyBrown bg-rosyBrown") Precio
+                        th(class="border border-coolGray bg-coolGray") Ubicación
+                    tr
+                        td(class="border bg-vividSky text-center") Casa 1
+                        td(class="border border-gray-300") $100,000
+                        td(class="border border-gray-300") Calle Emiliano Zapata #37
+                    tr
+                        td(class="border bg-esmerald text-center") Casa 2
+                        td(class="border border-gray-300") $50,000
+                        td(class="border border-gray-300") Calle Las flores #17
+                    tr
+                        td(class="border bg-vividSky text-center") Casa 3
+                        td(class="border border-gray-300") $78,000
+                        td(class="border border-gray-300") Avenida UTXJ #12
+                    tr
+                        td(class="border bg-esmerald text-center") Casa 4
+                        td(class="border border-gray-300") $150,000
+                        td(class="border border-gray-300") Calle La cabaña #16
+
+            //mensajes
+            div
+                table(class="border-collapse border border-darkCian w-full")
+                    tr
+                        td(class="text-xl font-bold mb-4 text-center bg-esmerald") Mensajes
+                        td(class="text-xl font-bold mb-4 text-center bg-esmerald")
+                    tr
+                        th(class="border border-coolGray bg-coolGray") Usuario
+                        th(class="border border-rosyBrown bg-rosyBrown") Mensaje
+                    tr
+                        td(class="border bg-vividSky text-center") Usuario 1
+                        td(class="rounded-lg border border-none") ¡Hola!, me interesa la casa 1
+                    tr
+                        td(class="border bg-esmerald text-center") Usuario 2
+                        td(class="border border-gray-300 ") Quiero más información de la casa 3 :0
+                    tr
+                        td(class="border bg-vividSky text-center") Usuario 3
+                        td(class="border border-gray-300 ") Deseo comprar la casa 2!
+            div
+            div
+                //ofertas
+                table(class="border-collapse border border-darkCian w-full")
+                    tr 
+                        td(class="text-xl font-bold mb-4 bg-esmerald") Ofertas
+                        td(class="text-xl font-bold mb-4 text-center bg-esmerald")
+                    tr
+                        td(class="border border-none text-center") Llevate la Casa 1 por un increible 30% de descuento
+                        td(class="border border-none text-center")
