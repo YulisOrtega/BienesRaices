@@ -8,8 +8,11 @@ const db = new Sequelize(process.env.bd_name,process.env.bd_user,process.env.bd_
     host: process.env.bd_host, 
     port:"3306",
     dialect:"mysql",//lenguaje especifico que sql va a utilizar
-    timezone:"America/Mexico_City",//agregar datos en la hora correspondiente
     define:{timestamp:true},
+    timezone:"America/Mexico_City",//agregar datos en la hora correspondiente
+    define:{
+        timestamps:true,
+    },
     pool:{ 
         max:5,
         min:0,

@@ -6,29 +6,30 @@ import { generateID, jwtToken } from "../lib/tokens.js";
 import { emailRegister} from "../lib/emails.js";
 import { emailResetPassword } from "../lib/emails.js";
 import { json } from "sequelize";
-//import bcrypt from "bcrypt";
+import dotenv from 'dotenv';
 
+dotenv.config({ path: "src/.env" })
 
-const userControllers = {};
-
+//const userControllers = {};
 const formlogin  = (request, response)=>{
     response.render("auth/login.pug",{
         showHeader:false,
         page : "Login",
         isLogged: false
-    })
+    });
     }
 
 const formRegister  = (request, response)=>{
     response.render("auth/register.pug", {
-        page : "Creating New Account"
-    })
+        page : "Creating New Account",
+        isLogged:true
+    });
     }
 
     const formPasswordRecovery  = (request,response)=>{
-        response.render("auth/recovery.pug", 
-        {
-            page : "Password Recovery"
+        response.render("auth/recovery.pug", {
+            page : "Password Recovery",
+            isLogged:true
         })
     }
 
@@ -39,9 +40,10 @@ const formRegister  = (request, response)=>{
         })
     }
     
-    const insertUser  = async(request,response)=>{
+    const insertUser= async(request,response)=>{
        console.log("El usuario esta intentando registrar sus datos en la base de datos");
        console.log(`Nombre: ${request.body.name}`);
+      
        //validaciones
        await check("name").notEmpty().withMessage("Name field requiere").run(request)//verifica los datos
 
@@ -61,6 +63,7 @@ const formRegister  = (request, response)=>{
 
         const userExists = await User.findOne({where: {email: email}})
         console.log(userExists);
+        
         if (userExists){
             return response.render("auth/register.pug", {
                 page : "Creating new account",

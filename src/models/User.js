@@ -20,7 +20,8 @@ const User = db.define("tbb_users",
     },
     token:{
         type: DataTypes.STRING,  
-        unique: true 
+        unique: true,
+        defaultValue: null
     },
     verified:{
         type: DataTypes.BOOLEAN,
@@ -35,8 +36,7 @@ const User = db.define("tbb_users",
         }
     }
 })
-
-//comparar contraseñas (Contraseeña pasada como param y la contraseña de la bd(user))
+//comparar contraseñas (Contraseña pasada como param y la contraseña de la bd(user))
 User.prototype.verifyPassword = function(password){
     return bcrypt.compareSync(password, this.password);
 }

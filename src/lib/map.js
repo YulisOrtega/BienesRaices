@@ -1,33 +1,72 @@
-(function (){
-    const lat = 20.4549926; 
-    const lng = -97.7332597;
-    const map = L.map('map').setView([lat, lng ], 16);
-    let marker
-    const geocoderService = L.esri.Geocoding.geocoderService();
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"> openstreetmap</a> contributors'
-    }).addTo(map);
-
-  marker = new L.marker([lat, lng],{
-    draggable:true,
-    autoPan:true,
+document.addEventListener('DOMContentLoaded', function() {
+  const lat = 20.4549926; 
+  const lng = -97.7332597;
+  const map = L.map('map').setView([lat, lng ], 16);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"> openstreetmap</a> contributors'
   }).addTo(map);
 
-  marker.on('moveend', function (e){
-    marker=e.target
-    const position=marker.getLatLng()
-    console.log(`El usuario soltó el marcador en las coordenadas:${position.lat},${position.lng}`)
-    map.panTo(new L.LatLng(position.lat, position.lng))
+  // Añadir marcador inicial al mapa
+  const marker = L.marker([20.4549926, -97.7332597], { 
+      draggable: true,
+      autoPan:true
+   }).addTo(map);
 
-    geocoderService.reverse().latlng(position, 13).run(function(error, result){
-        console.log(`La información calculada por geocoder al intentar hacer la georeferencia
-        inversa es: ${result}`)
-        console.log(result)
 
-        marker.bindPopup(result.address.LongLabel)
-    })
-})
-})
+  const currentDate = new Date();
+  const lastVisitDate = localStorage.getItem('lastVisitDate');
+  localStorage.setItem('lastVisitDate', currentDate.toString());
+  const lastVisitMessageDiv = document.getElementById('lastVisitMessage');
+  if (lastVisitDate) {
+      lastVisitMessageDiv.innerText = `Última fecha de vista del mapa: ${lastVisitDate}`;
+  } else {
+      lastVisitMessageDiv.innerText = 'Esta es tu primera visita al mapa.';
+  }
+ 
+  // Función para actualizar la información de la calle
+  function actualizarInformacionCalle(latlng) {
+      const geocodeService = L.esri.Geocoding.geocodeService();
+      geocodeService.reverse().latlng(latlng).run(function (error, resultado) {
+          if (error) {
+              console.error(error);
+              return;
+          }
+
+          // Actualizar el popup del marcador con la dirección
+          marker.bindPopup(`<b>Dirección:</b> ${resultado.address.Match_addr}`).openPopup();
+
+          // También puedes actualizar otros elementos del DOM
+          const calleElement = document.querySelector('.calle');
+          const mapaElement = document.querySelector('#mapa');
+          const latElement = document.querySelector('#lat');
+          const lngElement = document.querySelector('#lng');
+
+          if (calleElement) calleElement.textContent = resultado.address.Address || '';
+          if (mapaElement) mapaElement.value = resultado.address.Address || '';
+          if (latElement) latElement.value = resultado.latlng.lat || '';
+          if (lngElement) lngElement.value = resultado.latlng.lng || '';
+      });
+  }
+
+  // Llama a la función para actualizar la información de la calle cuando se carga la página
+  const latlng = marker.getLatLng();
+  actualizarInformacionCalle(latlng);
+
+  // Actualiza el contenido del popup antes de la primera vez que se muestra
+  marker.once('popupopen', function () {
+      const latlng = marker.getLatLng();
+      actualizarInformacionCalle(latlng);
+  });
+
+  // Manejador de eventos para el evento dragend del marcador
+  marker.on('dragend', function (event) {
+      const marker = event.target;
+      const latlng = marker.getLatLng();
+
+      // Llama a la función para actualizar la información de la calle con las nuevas coordenadas
+      actualizarInformacionCalle(latlng);
+  });
+});
 
 
 
@@ -37,8 +76,8 @@
 
 /*document.addEventListener('DOMContentLoaded', function() {
     console.log('Hasta aqui funciona bien.')
-    const lat = 20.617893; 
-    const lng = -97.818094;
+    const lat = 20.4549926; 
+    const lng = -97.7332597;
     const map = L.map('map').setView([lat, lng ], 16);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"> openstreetmap</a> contributors'

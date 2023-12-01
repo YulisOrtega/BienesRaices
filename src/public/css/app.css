@@ -668,9 +668,6 @@ video {
 .border {
   border-width: 1px;
 }
-.border-t {
-  border-top-width: 1px;
-}
 .border-none {
   border-style: none;
 }
@@ -689,10 +686,6 @@ video {
 .bg-coolGray {
   --tw-bg-opacity: 1;
   background-color: rgb(138 137 192 / var(--tw-bg-opacity));
-}
-.bg-darkCian {
-  --tw-bg-opacity: 1;
-  background-color: rgb(4 138 129 / var(--tw-bg-opacity));
 }
 .bg-esmerald {
   --tw-bg-opacity: 1;
@@ -748,13 +741,13 @@ video {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .text-left {
   text-align: left;
@@ -845,10 +838,6 @@ video {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.outline-none {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
 }
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

@@ -6,14 +6,13 @@ import express from 'express'
 import generalRoutes from './routes/generalRoutes.js'
 import usersRouters from './routes/usersRouters.js'
 import db from './config/db.js';
-import User from './models/User.js';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import {homePage} from './controllers/userControllers.js';
 dotenv.config({path:"src/.env"})
 import propertyRoutes from './routes/propertyRoutes.js';
-import Property from './models/Property.js';
+import {User, Category, Price, Property} from './models/relationShips.js'
 
  //Instancias el modulo express de la libreria para definir el servidor que atendera las peticiones
  const app = express();
@@ -48,6 +47,7 @@ app.set('PORT', process.env.PORT || 3000)
       connectSrc: ["'self'", 'https://tile-provider-domain.com', 'https://geocode.arcgis.com'],
   },
 }));
+
 
 
  //cookie-parser
