@@ -6,7 +6,7 @@
     const geocoderService = L.esri.Geocoding.geocoderService();
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"> openstreetmap</a> contributors'
-  }).addTo(map);
+    }).addTo(map);
 
   marker = new L.marker([lat, lng],{
     draggable:true,
