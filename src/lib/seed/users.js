@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-const usuarios = [
+const users = [
     {
         name: 'Mariano Islas',
         email: 'marianoIslas@gmail.com',
@@ -57,4 +57,4 @@ const usuarios = [
         verified: 1
     }
 ]
-export default usuarios;
+export default users;

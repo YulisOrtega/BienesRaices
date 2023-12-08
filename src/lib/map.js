@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"> openstreetmap</a> contributors'
   }).addTo(map);
-
   // Añadir marcador inicial al mapa
   const marker = L.marker([20.4549926, -97.7332597], { 
       draggable: true,
@@ -35,13 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
           // Actualizar el popup del marcador con la dirección
           marker.bindPopup(`<b>Dirección:</b> ${resultado.address.Match_addr}`).openPopup();
 
-          // También puedes actualizar otros elementos del DOM
-          const calleElement = document.querySelector('.calle');
+          const streetElement = document.querySelector('.street');
+          const streetelement = document.querySelector('#street');
           const mapaElement = document.querySelector('#mapa');
           const latElement = document.querySelector('#lat');
           const lngElement = document.querySelector('#lng');
 
-          if (calleElement) calleElement.textContent = resultado.address.Address || '';
+          if (streetElement) streetElement.textContent = resultado.address.Address || '';
+          if (streetelement) streetelement.value = resultado.address.Address || '';
           if (mapaElement) mapaElement.value = resultado.address.Address || '';
           if (latElement) latElement.value = resultado.latlng.lat || '';
           if (lngElement) lngElement.value = resultado.latlng.lng || '';

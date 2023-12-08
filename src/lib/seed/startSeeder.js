@@ -4,8 +4,8 @@ import Category from "../../models/Category.js";
 import db from "../../config/db.js";
 import Price from "../../models/Price.js";
 import prices from "./prices.js";
-import { truncate } from "node:fs";
-import { QueryTypes } from "sequelize";
+//import { truncate } from "node:fs";
+//import { QueryTypes } from "sequelize";
 import users from './users.js';
 import User from "../../models/User.js";
 
@@ -24,6 +24,10 @@ const importData = async ()=>{
         Price.bulkCreate(prices),
         User.bulkCreate(users)
     ])
+        await db.query("alter table tbc_categories auto_increment=1"),
+        await db.query("alter table tbc_prices auto_increment=1"),
+        await db.query("alter table tbb_users auto_increment=1")
+
         console.log('Datos importados correctamente')
         exit()
 
@@ -40,17 +44,20 @@ const deleteData = async ()=>{
                 where:{}, truncate:false
             }),
             db.query("Alter table tbc_categories auto_increment=1"),
+
             Price.destroy({
                 where:{}, truncate:false
             }),
             db.query("Alter table tbc_prices auto_increment=1"),
+
             User.destroy({
                 where: {}, truncate: false
             }),
             db.query("ALTER TABLE tbb_users AUTO_INCREMENT=1"),
         ])
-    }
-    catch(error){
+        console.log("Datos eliminados con éxito")
+        exit()
+    }catch(error){
         console.log(error)
         exit(1)
     }

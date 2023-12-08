@@ -1,6 +1,6 @@
 extends ../layout/index
 block styles
-    link(rel="stylesheet", href="http://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")
 block content
     div(class="py-10")
         h1(class="text-4xl my-10 font-extrabold text-center text-black") Real
@@ -8,8 +8,8 @@ block content
         h2(class="text-center text-2xl font-extrabold mb-10")= page 
 
     div.bg-rosyBrown.shadow-xl.py-8.px-4.rounded.mx-auto.rounded.mx-auto.max-w-4xl.my-10.space-y-8(class="md:px-10")
-        form(action="/property/create/loadImage" class="space-y-8 dropzone" method="POST") 
-        input(class="w-full py-3 px-3 bg-vividSky hover:bg-coolGray hover:scale-205 hover:text-white rounded uppercase font-bold cursor-pointer text-center" value="Publish Property")
+        form(id="imageBox" action=`/property/create/loadImage/${propertyID}` class="dropzone space-y-8 border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center" method="POST") 
+        button(id="postImage" class="mt-5 w-full py-3 px-3 bg-vividSky hover:bg-coolGray hover:scale-205 hover:text-white text-center rounder uppercase font-bold cursor-pointer " type="button") Publish Property
 
 block scripts 
     script(src="/js/imageBox.js")

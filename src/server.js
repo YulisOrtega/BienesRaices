@@ -16,7 +16,16 @@ import {User, Category, Price, Property} from './models/relationShips.js'
 
  //Instancias el modulo express de la libreria para definir el servidor que atendera las peticiones
  const app = express();
-app.use(helmet());
+//app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com', "'unsafe-eval'"],
+    styleSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com', 'https://cloudflare.com', 'https://cdnjs.cloudflare.com'],
+    imgSrc: ["'self'", 'data:', 'https://unpkg.com', 'https://cloudflare.com', 'https://cdnjs.cloudflare.com', 'https://a.tile.openstreetmap.org', 'https://b.tile.openstreetmap.org', 'https://c.tile.openstreetmap.org'],
+    connectSrc: ["'self'", 'https://tile-provider-domain.com', 'https://geocode.arcgis.com', 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
+  },
+}));
 
  try {
    await db.authenticate();
@@ -37,18 +46,6 @@ app.set('PORT', process.env.PORT || 3000)
 
  //Permitimos la lectura de datos a traves de HTML
  app.use(express.urlencoded({extended: true}))
-
- app.use(helmet.contentSecurityPolicy({
-  directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com', "'unsafe-eval'"],
-      styleSrc: ["'self'", 'https://unpkg.com', 'https://cloudflare.com', 'https://cdnjs.cloudflare.com'],
-      imgSrc: ["'self'", 'data:', 'https://unpkg.com', 'https://cloudflare.com', 'https://cdnjs.cloudflare.com', 'https://a.tile.openstreetmap.org', 'https://b.tile.openstreetmap.org', 'https://c.tile.openstreetmap.org'],
-      connectSrc: ["'self'", 'https://tile-provider-domain.com', 'https://geocode.arcgis.com'],
-  },
-}));
-
-
 
  //cookie-parser
  app.use(cookieParser())

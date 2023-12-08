@@ -43,12 +43,9 @@ const formRegister  = (request, response)=>{
     const insertUser= async(request,response)=>{
        console.log("El usuario esta intentando registrar sus datos en la base de datos");
        console.log(`Nombre: ${request.body.name}`);
-      
        //validaciones
        await check("name").notEmpty().withMessage("Name field requiere").run(request)//verifica los datos
-
        await check("email").notEmpty().withMessage('Email field is required').isEmail().withMessage('This field should be an Email (user@domain.ext) and not empty').run(request);//verifica los datos
-
         //validate min and max password
        await check("password").notEmpty().withMessage("Password field is requiere").isLength({min:8}).withMessage("Password must contain at least of 8 characteres").isLength({max:20}).withMessage("Password must contain at least than 20 characteres").equals(request.body.repeatpassword).withMessage("Bot password must be the same").run(request);
 
@@ -291,7 +288,7 @@ const formRegister  = (request, response)=>{
                 
           }else{
           response.render("auth/login.pug", {
-          page: `Login`,
+          page: "Login",
           errors: [{
             msg:`The email or password doesnt match`
           }],
@@ -306,7 +303,7 @@ const formRegister  = (request, response)=>{
         
     }else{
       response.render("auth/login.pug", {
-        page: `Login`,
+        page: "Login",
         errors: resultadoValidacion.array(),
         //! Sending params to pug 
         user: {

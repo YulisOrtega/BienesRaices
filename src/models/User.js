@@ -1,5 +1,5 @@
 //Elemento del ORM que permite definir los tipos de datos de las propiedades (columnas en la BD)
-import { BOOLEAN, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from '../config/db.js';
 import bcrypt from 'bcrypt';
 

@@ -3,15 +3,16 @@ import nodemailer from "nodemailer"
 
 dotenv.config({ path: "src/.env"})
 
+var transport = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
 const emailRegister = async (userData) => {
-    let transport = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
     const {name, email, token} = userData;
 
     await transport.sendMail({

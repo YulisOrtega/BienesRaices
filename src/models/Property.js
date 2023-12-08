@@ -51,7 +51,7 @@ const Property = db.define("tbb_properties",{
     published:{
         type:DataTypes.BOOLEAN,
         allowNull:false,
-        default:false
+        defaultValue:false
     }
 })
 

@@ -10,16 +10,19 @@ const db = new Sequelize(process.env.bd_name,process.env.bd_user,process.env.bd_
     dialect:"mysql",//lenguaje especifico que sql va a utilizar
     define:{timestamp:true},
     timezone:"America/Mexico_City",//agregar datos en la hora correspondiente
-    define:{
+    define:
+    {
         timestamps:true,
-    },
-    pool:{ 
+    pool:
+    { 
         max:5,
         min:0,
         acquire:30000,
         idle:1000,
         operatorAliases:false
     }
-});
+}
+}
+);
 
 export default db;

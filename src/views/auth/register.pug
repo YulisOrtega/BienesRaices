@@ -29,7 +29,7 @@ block content
     .mt-8.mx-auto.max-w-xl 
       .bg-rosyBrown.py-8.px-4.shadow-x1.rounded-lg
         form.space-y-5(action="/login/register" method="POST" novalidate)
-          input(type="hidden" name="_csrf" value="csrfToken")
+          input(type="hidden" name="_csrf" value=csrfToken)
           div.w-full
             label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for="name") Name 
             input#name.w-full.px-3.py-2.border.border.gray-300.rounded-xl(class="ease-in-out focus:outline-none focus:border-2 focus:border-darkCian" placeholder="full name" type="text" name="name" value=user ? user.name : '' required)

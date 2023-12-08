@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv"; 
 dotenv.config({ path: "src/.env"})
 //token id
-const generateID =() => Date.now().toString(32) + Math.random().toString(32).substring(3)
+const generateID =() => Date.now().toString(32) + Math.random().toString(32).substring(3);
 
 const jwtToken=(userId) => jwt.sign({
     domain: process.env.JWT_DOMAIN,
