@@ -107,40 +107,6 @@ const saveProperty = async (request, response) => {
     }
 }
 
-
-/*const saveProperty = async (request, response) => {
-    //TODO: Realizar las validaciones del campo antes de intentar guardar.
-    //TODO: Implementar el auto rellenado en el formulario.
-    console.log('Validar y guardar datos en la Bd de datos');
-
-    const { title, description, nRooms, nParkinlots, nWC, priceRange, category, street, lat, lng } = request.body
-    console.log(request.body)
-    try {
-        
-        const loggedUser = request.User.id
-        console.log(loggedUser)
-        if (loggedUser) {
-            const savedProperty = await Property.create({
-                title,
-                description,
-                nRooms,
-                nParkinlots,
-                nWC,
-                price_ID: priceRange,
-                category_ID: category,
-                address: street,
-                lat,
-                lng,
-                user_ID: loggedUser,
-            })
-            response.redirect(`./create/addImage/${savedProperty.id}`)
-        }
-    } catch (error) {
-        console.log(error)
-        return response.clearCookie('_token').redirect("/login")
-    }
-}
-*/
 const formAddImage = async (request, response) => {
     const { id } = request.params
     console.log(`Params: ${request.params.id}`)
@@ -156,7 +122,7 @@ const formAddImage = async (request, response) => {
             response.render('login/home')
         } else {
             response.render('property/addImage', {
-                page: 'Add Image to Proprety',
+                page: 'Add Image to Property',
                 propertyID:searchedProperty.id
             })
 
@@ -169,7 +135,7 @@ const formAddImage = async (request, response) => {
             const { id } = request.params
 
             //Validar que la propiedad exista.
-            const searchedProperty = await Property.findByPk(id)//Selec * From tbb_propiedades where ID = id
+            const searchedProperty = await Property.findByPk(id)//Select * From tbb_propiedades where ID = id
 
             if (!searchedProperty) {
                 console.log('La propiedad buscada no existe')

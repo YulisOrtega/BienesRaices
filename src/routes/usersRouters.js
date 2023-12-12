@@ -13,7 +13,7 @@ router.post("/recovery", resetPassword)
 router.get("/confirm/:token",confirmAccount)
 //Change Password
 router.get("/change-password/:tokenPassword", changePassword);
-router.post("/update-password/:tokenPassword", updatePassword);
+//router.post("/update-password/:tokenPassword", updatePassword);
 router.post("/", authenticateUser);
 router.get("/home", homePage);
 export default router

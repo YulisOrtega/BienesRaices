@@ -21,7 +21,7 @@ const Property = db.define("tbb_properties",{
         allowNull:false,
         defaultValue:0
     },
-    nParkinlots:{
+    pLot:{
         type:DataTypes.INTEGER,
         allowNull:false,
         defaultValue:0

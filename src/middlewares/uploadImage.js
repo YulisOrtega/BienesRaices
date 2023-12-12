@@ -2,7 +2,8 @@ import multer from "multer";
 import path from "path";
 import {generateID} from '../lib/tokens.js'
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage(
+    {
     destination: function(request, file, cb){
         console.log(file)
         cb(null, './src/public/img/uploads/')

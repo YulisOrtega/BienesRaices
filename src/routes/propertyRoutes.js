@@ -13,6 +13,8 @@ import {
 
 } from "../controllers/propertyController.js";
 import protectRoutes from "../middlewares/protectRoutes.js";
+import upload
+ from "../middlewares/uploadImage.js";
 
 const router= express.Router();
 
@@ -21,8 +23,8 @@ router.get("/create/", protectRoutes, formProperty)
 //router.post("/create/", protectRoutes, saveProperty);
 router.post("/create/", protectRoutes, saveProperty);
 router.get("/create/addImage/:id", protectRoutes, formAddImage);
-router.post("/create/loadImage/:id", protectRoutes, loadImage);
-//router.post("/create/addImage/:id", protectRoutes, upload.single('imageBox'), loadImage)
+//router.post("/create/loadImage/:id", protectRoutes, loadImage);
+router.post("/create/loadImage/:id", protectRoutes, upload.single('imageBox'), loadImage)
 
 
 
